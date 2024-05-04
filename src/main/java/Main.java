@@ -39,8 +39,8 @@ public class Main {
         libro2.setNumPagine(350);
 
 
-        elementoCatalogoDao.save(libro1);
-      /*   elementoCatalogoDao.save(libro2);*/
+        /*elementoCatalogoDao.save(libro1);
+         elementoCatalogoDao.save(libro2);*/
 
         Rivista rivista1 = new Rivista();
         rivista1.setPeriodicita(Periodicita.SETTIMANALE);
@@ -48,7 +48,7 @@ public class Main {
         rivista1.setAnnoPubblicazione(2024);
         rivista1.setNumPagine(50);
 
-      /*  elementoCatalogoDao.save(rivista1);*/
+       /* elementoCatalogoDao.save(rivista1);*/
 
     /*  System.out.println(elementoCatalogoDao.getById("a1bcf9cb-afad-43d5-ba98-528d81f745f8"));*/
 
@@ -64,7 +64,7 @@ public class Main {
 
         //cerco per parte del titolo
 
-        System.out.println(elementoCatalogoDao.getElementoByTitolo("e"));
+       /* System.out.println(elementoCatalogoDao.getElementoByTitolo("e"));*/
 
 
         // parte relativa ad utente e prestito
@@ -83,20 +83,20 @@ public class Main {
         utente2.setDataDiNascita(LocalDate.of(1975,1,1));
         utente2.setNumeroDiTessera(12346);
 
-        utenteDao.save(utente2);
+       /* utenteDao.save(utente2);*/
 
         Prestito prestito1 = new Prestito();
         prestito1.setUtente(utente2);
         prestito1.setElementoPrestato(libro1);
         prestito1.setDataInizioPrestito(LocalDate.of(2024,4,20));
-        prestito1.setDataRestituzioneEffettiva(LocalDate.of(2024,4,30));
-
-        prestitoDao.save(prestito1);
 
 
+        /*prestitoDao.save(prestito1);
+        */
+      /*  System.out.println(prestitoDao.getElementiInPrestitoByNumTessera(12346));*/
 
-
-
+        prestitoDao.getPrestitiScaduti().forEach(System.out::println
+        );
 
 
     }

@@ -2,11 +2,11 @@ package dao;
 
 import entities.ElementoCatalogo;
 import entities.Prestito;
-import entities.Utente;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import java.time.LocalDate;
 import java.util.List;
 
 public class PrestitoDao {
@@ -42,10 +42,22 @@ public class PrestitoDao {
     }
 
     //Query varie
-//get elementi in prestito attualmente
-    public List<ElementoCatalogo> getElementiByNumeroTessera(int tessera) {
-        Query query = em.createQuery("select p.ElementoPrestato from Prestito p where p.utente.numeroDiTessera = :tessera and p.dataRestituzioneEffettiva < p.dataRestituzionePrevista");
+
+    //get elementi in prestito attualmente
+    public List<ElementoCatalogo> getElementiInPrestitoByNumTessera(int tessera) {
+        Query query = em.createQuery("select p.elementoPrestato from Prestito p where p.utente.numeroDiTessera = :tessera and p.dataRestituzioneEffettiva is null");
         query.setParameter("tessera", tessera);
         return query.getResultList();
     }
+
+
+    //get prestiti scaduti, non ancora restituiti
+
+    public List<Prestito> getPrestitiScaduti() {
+        LocalDate dataOggi = LocalDate.now();
+        Query query = em.createQuery("select p from Prestito p where p.dataRestituzioneEffettiva is null and :dataOggi > p.dataRestituzionePrevista");
+        query.setParameter("dataOggi",dataOggi);
+        return query.getResultList();
+    }
 }
+
