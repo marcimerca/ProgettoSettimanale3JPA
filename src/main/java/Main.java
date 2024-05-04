@@ -48,13 +48,14 @@ public class Main {
         rivista1.setAnnoPubblicazione(2024);
         rivista1.setNumPagine(50);
 
-       /* elementoCatalogoDao.save(rivista1);*/
+        /* elementoCatalogoDao.save(rivista1);*/
 
-    /*  System.out.println(elementoCatalogoDao.getById("a1bcf9cb-afad-43d5-ba98-528d81f745f8"));*/
+        /*  System.out.println(elementoCatalogoDao.getById("a1bcf9cb-afad-43d5-ba98-528d81f745f8"));*/
 
-      Rivista rivistaEsistente = (Rivista) elementoCatalogoDao.getById("cf2fe695-41cd-43e4-bee6-0931a7c17c38");
+//ho fatto che si può passare una stringa, convertita in UUID dalla funzione nel DAO
+        Rivista rivistaEsistente = (Rivista) elementoCatalogoDao.getById("cf2fe695-41cd-43e4-bee6-0931a7c17c38");
 
-       /* elementoCatalogoDao.delete(rivistaEsistente.getIsbn());*/
+        /* elementoCatalogoDao.delete(rivistaEsistente.getIsbn());*/
 
         /*System.out.println(elementoCatalogoDao.getElementoByAnnoPubblicazione(2001));*/
 
@@ -64,15 +65,15 @@ public class Main {
 
         //cerco per parte del titolo
 
-       /* System.out.println(elementoCatalogoDao.getElementoByTitolo("e"));*/
+        /* System.out.println(elementoCatalogoDao.getElementoByTitolo("codice"));*/
 
 
-        // parte relativa ad utente e prestito
+        // parte relativa a utente e prestito
 
         Utente utente1 = new Utente();
         utente1.setNome("Luigi");
         utente1.setCognome("Delle Bicocche");
-        utente1.setDataDiNascita(LocalDate.of(1970,1,1));
+        utente1.setDataDiNascita(LocalDate.of(1970, 1, 1));
         utente1.setNumeroDiTessera(12345);
 
         /*utenteDao.save(utente1);*/
@@ -80,21 +81,26 @@ public class Main {
         Utente utente2 = new Utente();
         utente2.setNome("Giorgio");
         utente2.setCognome("Vanni");
-        utente2.setDataDiNascita(LocalDate.of(1975,1,1));
+        utente2.setDataDiNascita(LocalDate.of(1975, 1, 1));
         utente2.setNumeroDiTessera(12346);
 
-       /* utenteDao.save(utente2);*/
+        /* utenteDao.save(utente2);*/
 
         Prestito prestito1 = new Prestito();
         prestito1.setUtente(utente2);
         prestito1.setElementoPrestato(libro1);
-        prestito1.setDataInizioPrestito(LocalDate.of(2024,4,20));
+        prestito1.setDataInizioPrestito(LocalDate.of(2024, 4, 20));
 
 
         /*prestitoDao.save(prestito1);
-        */
-      /*  System.out.println(prestitoDao.getElementiInPrestitoByNumTessera(12346));*/
+         */
 
+        //elementi attualmente in prestito di un utente data tessera
+
+        /*  System.out.println(prestitoDao.getElementiInPrestitoByNumTessera(12346));*/
+
+
+        //cerco elementi in prestito attualmente, non ancora restituiti
         prestitoDao.getPrestitiScaduti().forEach(System.out::println
         );
 
